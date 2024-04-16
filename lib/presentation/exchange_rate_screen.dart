@@ -8,8 +8,6 @@ import 'package:flutter_exchangerate/presentation/exchange_rate_view_model.dart'
 class ExchangeRateScreen extends StatefulWidget {
   ExchangeRateViewModel viewModel = ExchangeRateViewModel();
 
-  //The named parameter 'exchangeRateInfo' is required,
-  // but there's no corresponding argument. (Documentation)
 
   ExchangeRateScreen({Key? key}) : super(key: key);
 
@@ -18,13 +16,13 @@ class ExchangeRateScreen extends StatefulWidget {
 }
 
 class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
+  var textController = TextEditingController();
 
-  void updateUi() => setState(() {
-  });
+  void updateUi() => setState(() {});
+
 
   @override
   void initState() {
-
     super.initState();
     widget.viewModel.addListener(updateUi);
     widget.viewModel.onSearch('USD');
@@ -50,8 +48,9 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     TextField(
+                      controller: textController,
                       decoration: InputDecoration(
-                        hintText: '금액을 입력하세요',
+                        hintText: '딸라를 입력하세요',
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -68,7 +67,7 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     DropdownButton<String>(
-                      items: <String>['USD', 'KRW', 'JPY', 'EUR']
+                      items: <String>['KRW']
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -84,8 +83,8 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
               ),
             ],
           ),
-
-          Text('${widget.viewModel.exchangeRateInfo.conversionRates['KRW'] * 11}'),
+          Text(
+              '${((widget.viewModel.exchangeRateInfo?.conversionRates?['KRW']) * double.parse(textController.text)).toString() ?? '값 찾아 오는 중.'}'),
         ],
       ),
     );
