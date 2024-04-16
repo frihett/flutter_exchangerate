@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_exchangerate/data/data_source/exchange_rate_api.dart';
-import 'package:flutter_exchangerate/data/mapper/exchange_rate_mapper.dart';
-import 'package:flutter_exchangerate/data/repository/exchange_rate_repo.dart';
-import 'package:flutter_exchangerate/data/repository/exchange_rate_repo_impl.dart';
 import 'package:flutter_exchangerate/presentation/exchange_rate_view_model.dart';
 
 class ExchangeRateScreen extends StatefulWidget {
   ExchangeRateViewModel viewModel = ExchangeRateViewModel();
-
 
   ExchangeRateScreen({Key? key}) : super(key: key);
 
@@ -17,9 +12,9 @@ class ExchangeRateScreen extends StatefulWidget {
 
 class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
   var textController = TextEditingController();
+  dynamic result;
 
   void updateUi() => setState(() {});
-
 
   @override
   void initState() {
@@ -75,7 +70,9 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
                         );
                       }).toList(),
                       onChanged: (String? value) {
-                        // 선택된 통화 처리
+                        result = widget.viewModel.exchangeRateInfo
+                                ?.conversionRates?['KRW'] *
+                            textController.text;
                       },
                     ),
                   ],
@@ -83,8 +80,7 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
               ),
             ],
           ),
-          Text(
-              '${((widget.viewModel.exchangeRateInfo?.conversionRates?['KRW']) * double.parse(textController.text)).toString() ?? '값 찾아 오는 중.'}'),
+          Text('${result ?? '값 찾아 오는 중.'}'),
         ],
       ),
     );

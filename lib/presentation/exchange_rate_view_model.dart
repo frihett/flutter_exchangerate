@@ -7,11 +7,6 @@ class ExchangeRateViewModel with ChangeNotifier {
   final ExchangeRateRepository _exchangeRateRepository =
       ExchangeRateRepositoryImpl();
 
-
-
-
-
-
   ExchangeRateViewModel() {
     onSearch('USD');
     print('$_exchangeRateInfo');
