@@ -13,6 +13,7 @@ class ExchangeRateScreen extends StatefulWidget {
 class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
   var textController = TextEditingController();
   dynamic result;
+  String? selectedCurrency ;
 
   void updateUi() => setState(() {});
 
@@ -62,6 +63,9 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     DropdownButton<String>(
+                      value: selectedCurrency,
+                      hint: Text('통화를 선택해주세요'),
+                      dropdownColor: Colors.yellow,
                       items: <String>['KRW']
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
@@ -70,9 +74,12 @@ class _ExchangeRateScreenState extends State<ExchangeRateScreen> {
                         );
                       }).toList(),
                       onChanged: (String? value) {
+                        selectedCurrency = value;
+
                         result = widget.viewModel.exchangeRateInfo
-                                ?.conversionRates?['KRW'] *
-                            textController.text;
+                                ?.conversionRates?[value!] *
+                            double.parse(textController.text);
+                        setState(() {});
                       },
                     ),
                   ],
