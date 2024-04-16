@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_exchangerate/data/data_source/exchange_rate_api.dart';
 import 'package:flutter_exchangerate/data/mapper/exchange_rate_mapper.dart';
 import 'package:flutter_exchangerate/data/model/exchange_rate.dart';

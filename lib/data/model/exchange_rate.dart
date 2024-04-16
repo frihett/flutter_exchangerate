@@ -1,6 +1,6 @@
 class ExchangeRate {
- final String timeLastUpdateUtc;
- final Map<String, dynamic> conversionRates;
+  final String timeLastUpdateUtc;
+  final Map<String, dynamic> conversionRates;
 
 //<editor-fold desc="Data Methods">
   const ExchangeRate({
