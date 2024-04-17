@@ -8,6 +8,7 @@ class ExchangeRateViewModel with ChangeNotifier {
       ExchangeRateRepositoryImpl();
 
   ExchangeRateViewModel() {
+    //Non-nullable instance field 'currencyList' must be initialized. (Documentation)
     onSearch('USD');
     print('$_exchangeRateInfo');
   }
@@ -18,6 +19,16 @@ class ExchangeRateViewModel with ChangeNotifier {
 
   void onSearch(String currency) async {
     _exchangeRateInfo = await _exchangeRateRepository.getExchangeInfo(currency);
+
+    currencyList = _exchangeRateInfo
+        ?.conversionRates.keys.toList() ?? [];
     notifyListeners();
   }
+  List<String>?  currencyList ;
+  //he instance member '_exchangeRateInfo' can't be accessed in an initializer.
+// (Documentation)  Try replacing the reference to the instance member
+// with a different expression
+// A value of type 'List<String>?' can't be assigned to a variable
+// of type 'List<String>'. (Documentation)  Try changing the type of the variable,
+// or casting the right-hand type to 'List<String>'.
 }

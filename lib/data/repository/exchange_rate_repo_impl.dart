@@ -12,9 +12,3 @@ class ExchangeRateRepositoryImpl implements ExchangeRateRepository {
     return result.toExchangeRate();
   }
 }
-
-void main() async {
-  ExchangeRateRepository exchangeRateRepository = ExchangeRateRepositoryImpl();
-  final result = await exchangeRateRepository.getExchangeInfo('KRW');
-  print(result);
-}
